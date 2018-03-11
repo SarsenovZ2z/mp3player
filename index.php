@@ -1,4 +1,3 @@
-<!doctype html5>
 <html>
     <head>
         <meta charset="utf-8">
@@ -7,10 +6,13 @@
     </head>
     <body>
         <header></header>
+        <div id="subheader"></div>
         <main>
             <div id="mp3-player">
-                <div id="audio-box"></div>
-                <canvas id="audio-analyser"></canvas>
+                <canvas id="audio-visualizer"></canvas>
+                <div id="audio-box">
+                    <audio autoplay loop ﻿></audio>
+                </div>
             </div>
         </main>
         <footer>
