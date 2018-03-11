@@ -22,6 +22,7 @@ function nextSample(t) {
         newSample = samples[Math.round(Math.random()*3)];
     }
     t.src = newSample;
+    t.play();
 }
 
 visualizer.onclick = function() {
