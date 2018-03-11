@@ -39,7 +39,7 @@ audioBox.children[0].onended = function() {
     nextSample(audioBox.children[0]);
 };
 
-window.onload = initMp3Player;
+window.addEventListener("load", initMp3Player, false);
 function initMp3Player() {
     nextSample(audioBox.children[0]);
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -56,18 +56,23 @@ function visualize() {
     var fbc = new Uint8Array(analyser.frequencyBinCount);
     analyser.getByteFrequencyData(fbc);
 
-    ctx.fillStyle = "rgba(255, 255, 255, 0.3)";
+    ctx.fillStyle = "rgba(255, 255, 255, 0.4)";
     ctx.shadowBlur = 0;
-    ctx.fillRect(0, 0, visualizer.width, visualizer.height);
+    if (detectmob()) {
+        ctx.clearRect(0, 0, visualizer.width, visualizer.height);
+    }
+    else {
+        ctx.fillRect(0, 0, visualizer.width, visualizer.height);
+    }
+
     ctx.fillStyle = "red";
     ctx.shadowColor = "red";
-    ctx.shadowBlur = 10;
-    var cols = 80;
-    var offset = 15;
+    ctx.shadowBlur = 0;
+    var cols = 100;
+    var offset = 10;
     if (detectmob()) {
-        ctx.shadowBlur = 0;
         cols = 40;
-        offset = 20;
+        offset = 10;
     }
     colWidth = (visualizer.width+offset-offset*cols)/cols;
     for (var i=0;i<cols;++i) {
