@@ -64,10 +64,31 @@ function visualize() {
     ctx.shadowBlur = 10;
     var cols = 80;
     var offset = 15;
+    if (detectmob()) {
+        ctx.shadowBlur = 0;
+        cols = 40;
+        offset = 20;
+    }
     colWidth = (visualizer.width+offset-offset*cols)/cols;
     for (var i=0;i<cols;++i) {
         colx = i*(colWidth + offset);
         colHeight = Math.min(-(fbc[i]), 0)*2.3;
         ctx.fillRect(colx, visualizer.height, colWidth, colHeight);
     }
+}
+
+function detectmob() {
+ if( navigator.userAgent.match(/Android/i)
+ || navigator.userAgent.match(/webOS/i)
+ || navigator.userAgent.match(/iPhone/i)
+ || navigator.userAgent.match(/iPad/i)
+ || navigator.userAgent.match(/iPod/i)
+ || navigator.userAgent.match(/BlackBerry/i)
+ || navigator.userAgent.match(/Windows Phone/i)
+ ){
+    return true;
+  }
+ else {
+    return false;
+  }
 }
