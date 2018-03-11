@@ -11,7 +11,7 @@
             <div id="mp3-player">
                 <canvas id="audio-visualizer"></canvas>
                 <div id="audio-box">
-                    <audio autoplay loop ﻿></audio>
+                    <audio autoplay﻿></audio>
                 </div>
             </div>
         </main>
