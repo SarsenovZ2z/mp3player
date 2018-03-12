@@ -56,30 +56,34 @@ function visualize() {
     var fbc = new Uint8Array(analyser.frequencyBinCount);
     analyser.getByteFrequencyData(fbc);
 
-    ctx.fillStyle = "rgba(255, 255, 255, 0.4)";
-    ctx.shadowBlur = 0;
     if (detectmob()) {
         ctx.clearRect(0, 0, visualizer.width, visualizer.height);
     }
     else {
+        ctx.fillStyle = "rgba(255, 255, 255, 0.3)";
         ctx.fillRect(0, 0, visualizer.width, visualizer.height);
     }
 
-    ctx.fillStyle = "red";
-    ctx.shadowColor = "red";
-    ctx.shadowBlur = 0;
     var cols = 100;
-    var offset = 10;
     if (detectmob()) {
         cols = 40;
-        offset = 10;
     }
-    colWidth = (visualizer.width+offset-offset*cols)/cols;
+    colWidth = 3;
+    var offset = (visualizer.width-cols*colWidth)/(cols+1);
+    var k = (visualizer.height/2)/255;
+
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = colWidth;
+    ctx.beginPath();
     for (var i=0;i<cols;++i) {
-        colx = i*(colWidth + offset);
-        colHeight = Math.min(-(fbc[i]), 0)*2.3;
-        ctx.fillRect(colx, visualizer.height, colWidth, colHeight);
+        colx = i*(colWidth + offset)+offset;
+        colHeight = -k*fbc[i];
+        if (colHeight<0) {
+            ctx.moveTo(colx, visualizer.height);
+            ctx.lineTo(colx, visualizer.height+colHeight);
+        }
     }
+    ctx.stroke();
 }
 
 function detectmob() {
