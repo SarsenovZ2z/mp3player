@@ -1,7 +1,7 @@
 var player = document.getElementById("mp3-player");
 var visualizer = player.children[0];
-    visualizer.width = player.offsetWidth;
-    visualizer.height = player.offsetHeight;
+    visualizer.width = window.innerWidth;
+    visualizer.height = window.innerHeight;
 
 var ctx = visualizer.getContext("2d");
 var audioBox = player.children[1];
@@ -51,7 +51,7 @@ function initMp3Player() {
 }
 
 function visualize() {
-    window.requestAnimationFrame(visualize);
+    requestAnimationFrame(visualize);
 
     var fbc = new Uint8Array(analyser.frequencyBinCount);
     analyser.getByteFrequencyData(fbc);
@@ -85,6 +85,14 @@ function visualize() {
     }
     ctx.stroke();
 }
+
+(function() {
+  var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+                              window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+  window.requestAnimationFrame = requestAnimationFrame;
+})();
+
+
 
 function detectmob() {
  if( navigator.userAgent.match(/Android/i)
