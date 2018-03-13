@@ -23,8 +23,41 @@ html, body {
 
 #audio-box audio {
     width: 100%;
-    position: absolute;
     top: 0px;
+}
+
+#playlist {
+    height: 100px;
+    display: block;
+    float: left;
+}
+
+#player-navigator {
+    display: block;
+    background-color: lightgrey;
+    padding: 10px;
+    margin: 20px;
+    color: black;
+    font-size: 14pt;
+    font-weight: 800;
+}
+
+#upload-navigator {
+    display: block;
+    background-color: lightgrey;
+    float: left;
+    margin: 20px;
+    padding: 10px;
+}
+
+#upload-navigator button {
+    font-size: 12pt;
+    padding: 3px;
+}
+#uploadMp3 {
+    color: black;
+    font-size: 14pt;
+    font-weight: 800;
 }
 
 #audio-visualizer {
@@ -34,4 +67,5 @@ html, body {
     width: 100%;
     min-height: 100%;
     background-color: white;
+    z-index: -1;
 }
