@@ -10,12 +10,14 @@ var analyser, audioCtx, source;
 
 window.addEventListener("load", initMp3Player, false);
 function initMp3Player() {
-    
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     analyser = audioCtx.createAnalyser();
     source = audioCtx.createMediaElementSource(audioBox.children[0]);
     source.connect(analyser);
     analyser.connect(audioCtx.destination);
+    document.getElementById("player-navigator").value = "samples/The Jon Spenser Blues Explosion – Bellbottoms.mp3";
+    audioBox.children[0].src = "samples/The Jon Spenser Blues Explosion – Bellbottoms.mp3";
+    audioBox.children[0].play();
     visualize();
 }
 
@@ -33,15 +35,15 @@ function visualize() {
         ctx.fillRect(0, 0, visualizer.width, visualizer.height);
     }
 
-    var cols = 500;
+    var cols = 300;
     if (detectmob()) {
         cols = 40;
     }
-    colWidth = 0.5;
+    colWidth = 0.3;
     var offset = (visualizer.width-cols*colWidth)/(cols+1);
     var k = (visualizer.height*2/3)/255;
 
-    ctx.strokeStyle = "red";
+    ctx.strokeStyle = "black";
     ctx.lineWidth = colWidth;
     ctx.beginPath();
     for (var i=0;i<cols;++i) {
